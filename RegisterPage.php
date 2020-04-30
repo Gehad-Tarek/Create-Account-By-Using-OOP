@@ -78,6 +78,9 @@ class RegisterPage
         'name' => $this->formhandler->post('name'),
         'email' => $this->formhandler->post('email')
         ], time() + 3600);
+
+        
+        // $this->cookie->set('user', 'Hasan', time() + 3600);
    }
    
    /**

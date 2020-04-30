@@ -1,5 +1,14 @@
 <?php
 
+function isJson(string $json):bool
+{
+    json_decode($json);
+    if (json_last_error() === JSON_ERROR_NONE) {
+        return true;
+    }
+    return false;
+}
+
 class Cookie
 {
     /**
@@ -12,6 +21,9 @@ class Cookie
      */
     public function set(string $cookieName, $cookieValue, $time)
     {
+        if (is_array($cookieValue)) {
+            $cookieValue = json_encode($cookieValue);
+        }
         setcookie($cookieName, $cookieValue, $time);
     }
 
@@ -35,10 +47,16 @@ class Cookie
     public function get(string $cookieName)
     {
         if ($this->has($cookieName)) {
-            return $_COOKIE[$cookieName];
+            $value = $_COOKIE[$cookieName];
+
+            if (isJson($value)) {
+                return json_decode($value, true);
+            } else {
+                return $value;
+            }
         }
     
-        return null;
+        return '';
 
     }
 
@@ -50,9 +68,9 @@ class Cookie
      * @param $time
      * @return void
      */
-    public function remove(string $cookieName, $cookieValue, $time)
+    public function remove(string $cookieName)
     { 
-        setcookie($cookieName, $value, $time);
+        setcookie($cookieName, '', 0);
 
     }
 }
@@ -63,4 +81,18 @@ class Cookie
         return $cookie;
     }
 
-?>
+
+    // $user = [
+    //     'id' => 1,
+    //     'name' => 'Hasan',
+    // ];
+
+    // $d = json_encode($user);
+
+    // $m = json_decode($d, true);
+    
+    // echo '<pre>';
+    
+    // print_r($m);
+
+    // die;

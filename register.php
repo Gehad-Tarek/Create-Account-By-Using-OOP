@@ -69,7 +69,7 @@
 
     <h1>Create An Account</h1>
     <form method="POST" action="RegisterPage.php">
-        <input type="text" name="name" placeholder="username">
+        <input type="text" name="name" value="" placeholder="username">
 
         <?php if ($formhandler->getError('name')) { ?>
             <div class="error"><?php echo $formhandler->getError('name'); ?></div>
@@ -96,7 +96,7 @@
         <?php } ?>
 
         <br />
-        <h5 id="remember"><input id="checkbox" type="checkbox" name="Remember">Remember Me</h5> 
+        <h5 id="remember"><input id="checkbox" type="checkbox" name="Remember" value="checked">Remember Me</h5> 
         <button>Create New Account</button>
         
     </form>

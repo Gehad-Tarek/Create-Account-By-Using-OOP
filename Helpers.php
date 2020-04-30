@@ -27,7 +27,7 @@ class Helpers
      */
     function user(string $key)
     {
-        if (isset($_POST['Remember'])) {
+        if ($this->cookie->has('user')) {
             $user = $this->cookie->get('user');
 
             if (! $user) return '';

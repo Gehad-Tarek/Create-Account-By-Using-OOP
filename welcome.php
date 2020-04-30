@@ -1,5 +1,12 @@
 <?php
 require_once 'Helpers.php';
+
+// echo '<pre>';
+
+// print_r($_COOKIE);
+
+// die;
+
 ?>
 
 <!DOCTYPE html>

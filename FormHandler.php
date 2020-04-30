@@ -33,16 +33,16 @@ class FormHandler
      */
     public function setError(string $name, string $errorMessage)
     {
-            $formErrorsKey = 'form_errors'; 
+        $formErrorsKey = 'form_errors'; 
 
-            $errors =$this->session->get($formErrorsKey);
+        $errors =$this->session->get($formErrorsKey);
 
-            if (! $errors) {
-                $errors = [];
-            }
+        if (! $errors) {
+            $errors = [];
+        }
 
-            $errors[$name] = $errorMessage;
-            $this->session->set($formErrorsKey, $errors);
+        $errors[$name] = $errorMessage;
+        $this->session->set($formErrorsKey, $errors);
     }
 
     /**
@@ -85,10 +85,10 @@ class FormHandler
 
     }
 
-    public function errorsList()
-    {
-        return $this->session->get('form_errors');
-    }
+    // public function errorsList()
+    // {
+    //     return $this->session->get('form_errors');
+    // }
 }   
 
     $formhandler = new FormHandler();
@@ -105,3 +105,13 @@ class FormHandler
     // print_r($formhandler->errorsList());
 
     // die;
+
+
+
+
+
+
+
+
+
+
