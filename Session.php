@@ -12,7 +12,7 @@ class Session
      * @param  string $key 
      * @param  mixed $value 
      * @return void
-     */
+    **/
     public function set($key, $value)
     {
         $_SESSION[$key] = $value;

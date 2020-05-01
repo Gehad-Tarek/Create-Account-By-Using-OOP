@@ -4,6 +4,13 @@
     require_once 'FormHandler.php';
     // require_once 'RegisterPage.php';
     // $formhandler = new FormHandler();
+
+    // $username = $formhandler->post('name');
+    // $email = $formhandler->post('email');
+    // $password = $formhandler->post('password');
+    // $confirmPassword = $formhandler->post('confirm_password');
+
+
 ?>
 
 <!DOCTYPE html>
@@ -69,35 +76,44 @@
 
     <h1>Create An Account</h1>
     <form method="POST" action="RegisterPage.php">
-        <input type="text" name="name" value="" placeholder="username">
+        <input type="text" name="name" value="<?php if($session->has('user')) {
+            echo $session->get('user')['name'];
+        } ?>" placeholder="username">
 
         <?php if ($formhandler->getError('name')) { ?>
             <div class="error"><?php echo $formhandler->getError('name'); ?></div>
         <?php } ?>
 
         <br />
-        <input type="email" name="email" placeholder="email">
+        <input type="email" name="email" value="<?php if ($session->has('user')) {
+            echo $session->get('user')['email']; 
+        }?>" placeholder="email">
 
         <?php if ($formhandler->getError('email')) { ?>
             <div class="error"><?php echo $formhandler->getError('email'); ?></div>
         <?php } ?>
 
         <br />
-        <input type="password" name="password" placeholder="password">
+        <input type="password" name="password" value="<?php if ($session->has('user')) {
+         echo $session->get('user')['password']; 
+        }?>"  placeholder="password">
 
         <?php if ($formhandler->getError('password')) { ?>
             <div class="error"><?php echo $formhandler->getError('password'); ?></div>
         <?php } ?>
 
         <br />
-        <input type="password" name="confirm_password" placeholder="confirm-password">
+        <input type="password" name="confirm_password" value="<?php if ($session->has('user')) {
+         echo $session->get('user')['confirm_password']; 
+        }?>"  placeholder="confirm-password">
+        
         <?php if ($formhandler->getError('confirm_password')) { ?>
             <div class="error"><?php echo $formhandler->getError('confirm_password'); ?></div>
         <?php } ?>
 
         <br />
         <h5 id="remember"><input id="checkbox" type="checkbox" name="Remember" value="checked">Remember Me</h5> 
-        <button>Create New Account</button>
+        <button name = "submit_button">Create New Account</button>
         
     </form>
 </body>
