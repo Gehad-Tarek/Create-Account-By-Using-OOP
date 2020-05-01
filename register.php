@@ -76,8 +76,8 @@
 
     <h1>Create An Account</h1>
     <form method="POST" action="RegisterPage.php">
-        <input type="text" name="name" value="<?php if($session->has('user')) {
-            echo $session->get('user')['name'];
+        <input type="text" name="name" value="<?php if($session->has('userError')) {
+            echo $session->get('userError')['name'];
         } ?>" placeholder="username">
 
         <?php if ($formhandler->getError('name')) { ?>
@@ -85,8 +85,8 @@
         <?php } ?>
 
         <br />
-        <input type="email" name="email" value="<?php if ($session->has('user')) {
-            echo $session->get('user')['email']; 
+        <input type="email" name="email" value="<?php if ($session->has('userError')) {
+            echo $session->get('userError')['email']; 
         }?>" placeholder="email">
 
         <?php if ($formhandler->getError('email')) { ?>
@@ -94,8 +94,8 @@
         <?php } ?>
 
         <br />
-        <input type="password" name="password" value="<?php if ($session->has('user')) {
-         echo $session->get('user')['password']; 
+        <input type="password" name="password" value="<?php if ($session->has('userError')) {
+         echo $session->get('userError')['password']; 
         }?>"  placeholder="password">
 
         <?php if ($formhandler->getError('password')) { ?>
@@ -103,10 +103,10 @@
         <?php } ?>
 
         <br />
-        <input type="password" name="confirm_password" value="<?php if ($session->has('user')) {
-         echo $session->get('user')['confirm_password']; 
+        <input type="password" name="confirm_password" value="<?php if ($session->has('userError')) {
+         echo $session->get('userError')['confirm_password']; 
         }?>"  placeholder="confirm-password">
-        
+
         <?php if ($formhandler->getError('confirm_password')) { ?>
             <div class="error"><?php echo $formhandler->getError('confirm_password'); ?></div>
         <?php } ?>

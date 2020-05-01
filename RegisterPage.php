@@ -53,11 +53,17 @@ class RegisterPage
         }
 
         if ($this->formhandler->hasError()) {             // if there is an error in the user data  
-            $this->visitorUser();
+            $this->session->set('userError', [ 
+                'name' => $this->formhandler->post('name'), 
+                'email' => $this->formhandler->post('email'),
+                'password' => $this->formhandler->post('password'),
+                'confirm_password' => $this->formhandler->post('confirm_password')
+            ]);
             // echo '<pre>';
             // print_r($this->formhandler->errorsList());
             $this->helpers->redirectTo('register.php');
         } else {                                         // if all the data is correct
+            $this->session->remove('userError');
             if (isset($_POST['Remember'])) {
                 $this->rememberUser();
             } else {
@@ -93,9 +99,7 @@ class RegisterPage
    {
         $this->session->set('user',[
         'name' => $this->formhandler->post('name'),
-        'email' => $this->formhandler->post('email'),
-        'password' => $this->formhandler->post('password'),
-        'confirm_password' => $this->formhandler->post('confirm_password')
+        'email' => $this->formhandler->post('email')
         ]);
    }
 }
