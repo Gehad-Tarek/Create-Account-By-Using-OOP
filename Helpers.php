@@ -1,13 +1,13 @@
 <?php
-require_once 'Session.php';
-require_once 'Cookie.php';
+// require_once 'Session.php';
+// require_once 'Cookie.php';
 class Helpers 
 {
-    private $session, $cookie;
-    public function __construct(){
-        $this->session = sessionObject();
-        $this->cookie = cookieObject();
-    }
+    // private $session, $cookie;
+    // public function __construct(){
+    //     $this->session = sessionObject();
+    //     $this->cookie = cookieObject();
+    // }
     /**
      * Redirect to the given path
      * 
@@ -19,32 +19,32 @@ class Helpers
         header("location: $path"); 
     }
 
-    /**
-     * Get value for the given key from user info in session & cookie
-     * 
-     * @param  string $key 
-     * @return mixed
-     */
-    function user(string $key)
-    {
-        if ($this->cookie->has('user')) {
-            $user = $this->cookie->get('user');
+    // /**
+    //  * Get value for the given key from user info in session & cookie
+    //  * 
+    //  * @param  string $key 
+    //  * @return mixed
+    //  */
+    // function user(string $key)
+    // {
+    //     if ($this->cookie->has('user')) {
+    //         $user = $this->cookie->get('user');
 
-            if (! $user) return '';
+    //         if (! $user) return '';
     
-            if (! isset($user[$key])) return '';
+    //         if (! isset($user[$key])) return '';
     
-            return $user[$key];
-        } else {       
-            $user = $this->session->get('user');
+    //         return $user[$key];
+    //     } else {       
+    //         $user = $this->session->get('user');
 
-            if (! $user) return '';
+    //         if (! $user) return '';
 
-            if (! isset($user[$key])) return '';
+    //         if (! isset($user[$key])) return '';
 
-            return $user[$key];
-        }
-    }
+    //         return $user[$key];
+    //     }
+    // }
 }
 
     $helpers = new Helpers();
