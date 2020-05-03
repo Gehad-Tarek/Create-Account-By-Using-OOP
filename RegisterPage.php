@@ -31,6 +31,7 @@ class RegisterPage
         $username = $this->formhandler->post('name');
         $password = $this->formhandler->post('password');
         $confirmPassword = $this->formhandler->post('confirm_password');
+        // $ImagePath = $this->formhandler->post('imageToUpload');
 
         if (! $username) {
             $this->formhandler->setError('name', 'User Name Is Required');
@@ -52,17 +53,19 @@ class RegisterPage
             $this->formhandler->setError('confirm_password', 'Confirm Password did not match password');
         }
 
+        // $this->UploadFiles();
         if ($this->formhandler->hasError()) {             // if there is an error in the user data  
             $this->session->set('userError', [ 
                 'name' => $this->formhandler->post('name'), 
                 'email' => $this->formhandler->post('email'),
                 'password' => $this->formhandler->post('password'),
                 'confirm_password' => $this->formhandler->post('confirm_password')
+                // 'ImagePath' => $this->formhandler->post('imageToUpload')
             ]);
             // echo '<pre>';
             // print_r($this->formhandler->errorsList());
             $this->helpers->redirectTo('register.php');
-        } else {                                         // if all the data is correct
+        } else {              // if all the data is correct
             $this->session->remove('userError');
             if (isset($_POST['Remember'])) {
                 $this->rememberUser();
@@ -72,6 +75,18 @@ class RegisterPage
             // die('@_@');
             $this->helpers->redirectTo('welcome.php');
         }  
+    }
+    /**
+     * upload image and store it in Uploads Folder
+     * 
+     * @return void
+     */
+    public function uploadFiles()
+    {
+        $file_name = $_FILES['fileToUpload']['name']; 
+        $file_tmp_loc = $_FILES['fileToUpload']['tmp_name'];
+        $file_store = 'uploads/'.$file_name;
+        move_uploaded_file($file_tmp_loc, $file_store);   
     }
 
    /**
@@ -83,10 +98,9 @@ class RegisterPage
    {
         $this->cookie->set('user', [
         'name' => $this->formhandler->post('name'),
-        'email' => $this->formhandler->post('email')
+        'email' => $this->formhandler->post('email'),
+        'imagePath' => $this->uploadFiles()
         ], time() + 3600);
-
-        
         // $this->cookie->set('user', 'Hasan', time() + 3600);
    }
    
@@ -99,10 +113,13 @@ class RegisterPage
    {
         $this->session->set('user',[
         'name' => $this->formhandler->post('name'),
-        'email' => $this->formhandler->post('email')
+        'email' => $this->formhandler->post('email'),
+        'imagePath' => $this->uploadFiles()
         ]);
-   }
+   } 
+  
 }
     $registerpage = new RegisterPage();
     $registerpage->submit();
+    // $registerpage->uploadFiles();
 ?>

@@ -1,6 +1,6 @@
 <?php
-require_once 'Helpers.php';
-
+// require_once 'Helpers.php';
+require_once 'User.php';
 // echo '<pre>';
 
 // print_r($_COOKIE);
@@ -20,7 +20,7 @@ require_once 'Helpers.php';
 <form method="POST" action="LogoutPage.php">
     <h1>
         Welcome 
-        <?php echo  $helpers->user('name'); ?>        <!-- user function has been identified in helpers.php -->  
+        <?php echo  $user->name(); ?>        <!-- user function has been identified in helpers.php -->  
     </h1>
 
     <button>Logout</button>

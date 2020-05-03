@@ -2,15 +2,6 @@
     require_once 'Session.php';
     require_once 'Cookie.php';
     require_once 'FormHandler.php';
-    // require_once 'RegisterPage.php';
-    // $formhandler = new FormHandler();
-
-    // $username = $formhandler->post('name');
-    // $email = $formhandler->post('email');
-    // $password = $formhandler->post('password');
-    // $confirmPassword = $formhandler->post('confirm_password');
-
-
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +66,7 @@
 <body>
 
     <h1>Create An Account</h1>
-    <form method="POST" action="RegisterPage.php">
+    <form method="POST" action="RegisterPage.php" enctype="multipart/form-data">   
         <input type="text" name="name" value="<?php if($session->has('userError')) {
             echo $session->get('userError')['name'];
         } ?>" placeholder="username">
@@ -112,8 +103,9 @@
         <?php } ?>
 
         <br />
+        <input type="file" name="fileToUpload">
         <h5 id="remember"><input id="checkbox" type="checkbox" name="Remember" value="checked">Remember Me</h5> 
-        <button name = "submit_button">Create New Account</button>
+        <button type="submit" name="submit_button" >Create New Account</button>
         
     </form>
 </body>
