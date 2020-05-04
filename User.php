@@ -25,6 +25,33 @@ class User
             return false;
         }
     }
+
+    /**
+     * Get value for the given key from user info in session & cookie
+     * 
+     * @param  string $key 
+     * @return mixed
+     */
+    public function user(string $key)
+    {
+        if ($this->cookie->has('user')) {
+            $user = $this->cookie->get('user');
+
+            if (! $user) return '';
+    
+            if (! isset($user[$key])) return '';
+    
+            return $user[$key];
+        } else {       
+            $user = $this->session->get('user');
+
+            if (! $user) return '';
+
+            if (! isset($user[$key])) return '';
+
+            return $user[$key];
+        }
+    }
     
     /**
      * Get user name
@@ -33,24 +60,7 @@ class User
      */
     public function name(): string 
     {
-        // return $this->helpers->user('name');
-        if ($this->cookie->has('user')) {
-            $user = $this->cookie->get('user');
-
-            if (! $user) return '';
-    
-            if (! isset($user['name'])) return '';
-    
-            return $user['name'];
-        } else {       
-            $user = $this->session->get('user');
-
-            if (! $user) return '';
-
-            if (! isset($user['name'])) return '';
-
-            return $user['name'];
-        }
+        return $this->user('name');
     }
     
     /**
@@ -60,24 +70,7 @@ class User
      */
     public function email(): string 
     {
-        // return $this->helpers->user('email');
-        if ($this->cookie->has('user')) {
-            $user = $this->cookie->get('user');
-
-            if (! $user) return '';
-    
-            if (! isset($user['email'])) return '';
-    
-            return $user['email'];
-        } else {       
-            $user = $this->session->get('user');
-
-            if (! $user) return '';
-
-            if (! isset($user['email'])) return '';
-
-            return $user['email'];
-        }
+        return $this->user('email');
     }
     
     
@@ -88,24 +81,7 @@ class User
      */
     public function image(): string 
     {
-        // return $this->helpers->user('imagePath');
-        if ($this->cookie->has('user')) {
-            $user = $this->cookie->get('user');
-
-            if (! $user) return '';
-    
-            if (! isset($user['imagePath'])) return '';
-    
-            return $user['imagePath'];
-        } else {       
-            $user = $this->session->get('user');
-
-            if (! $user) return '';
-
-            if (! isset($user['imagePath'])) return '';
-
-            return $user['imagePath'];
-        }
+        return $this->user('imagePath');
     }
 }
 
